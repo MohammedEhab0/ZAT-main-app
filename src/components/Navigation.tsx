@@ -10,10 +10,9 @@ import {
 import { Menu } from "lucide-react";
 
 export default function Navigation() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // In a real app, this would come from your auth state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
   
-  // Toggle login state for demo purposes
   const toggleLoginState = () => {
     setIsLoggedIn(!isLoggedIn);
   };
@@ -31,10 +30,20 @@ export default function Navigation() {
             {isLoggedIn ? (
               <>
                 <Link to="/dashboard">
-                  <Button variant="ghost">Dashboard</Button>
+                  <Button 
+                    variant={location.pathname === '/dashboard' ? 'default' : 'ghost'}
+                    className={location.pathname === '/dashboard' ? 'bg-primary text-white' : ''}
+                  >
+                    Dashboard
+                  </Button>
                 </Link>
                 <Link to="/quiz">
-                  <Button variant="ghost">Take Quiz</Button>
+                  <Button 
+                    variant={location.pathname === '/quiz' ? 'default' : 'ghost'}
+                    className={location.pathname === '/quiz' ? 'bg-primary text-white' : ''}
+                  >
+                    Take Quiz
+                  </Button>
                 </Link>
                 <Button variant="ghost" onClick={toggleLoginState}>
                   Logout
@@ -44,20 +53,20 @@ export default function Navigation() {
               <>
                 <Link to="/login">
                   <Button 
-                    variant="ghost"
-                    className={location.pathname === '/login' ? 'bg-accent' : ''}
+                    variant={location.pathname === '/login' ? 'default' : 'ghost'}
+                    className={location.pathname === '/login' ? 'bg-primary text-white' : ''}
                   >
                     Login
                   </Button>
                 </Link>
                 <Link to="/register">
                   <Button
-                    className={location.pathname === '/register' ? 'bg-accent' : ''}
+                    variant={location.pathname === '/register' ? 'default' : 'ghost'}
+                    className={location.pathname === '/register' ? 'bg-primary text-white' : ''}
                   >
                     Get Started
                   </Button>
                 </Link>
-                {/* For demo purposes only - allows toggling the navigation state */}
                 <Button variant="ghost" size="sm" onClick={toggleLoginState} className="text-xs opacity-50">
                   Demo: Switch to logged-in view
                 </Button>
@@ -86,10 +95,20 @@ export default function Navigation() {
                   {isLoggedIn ? (
                     <>
                       <Link to="/dashboard">
-                        <Button variant="ghost" className="w-full justify-start">Dashboard</Button>
+                        <Button 
+                          variant={location.pathname === '/dashboard' ? 'default' : 'ghost'}
+                          className={`w-full justify-start ${location.pathname === '/dashboard' ? 'bg-primary text-white' : ''}`}
+                        >
+                          Dashboard
+                        </Button>
                       </Link>
                       <Link to="/quiz">
-                        <Button variant="ghost" className="w-full justify-start">Take Quiz</Button>
+                        <Button 
+                          variant={location.pathname === '/quiz' ? 'default' : 'ghost'}
+                          className={`w-full justify-start ${location.pathname === '/quiz' ? 'bg-primary text-white' : ''}`}
+                        >
+                          Take Quiz
+                        </Button>
                       </Link>
                       <Button 
                         variant="ghost" 
@@ -102,10 +121,20 @@ export default function Navigation() {
                   ) : (
                     <>
                       <Link to="/login">
-                        <Button variant="ghost" className="w-full justify-start">Login</Button>
+                        <Button 
+                          variant={location.pathname === '/login' ? 'default' : 'ghost'}
+                          className={`w-full justify-start ${location.pathname === '/login' ? 'bg-primary text-white' : ''}`}
+                        >
+                          Login
+                        </Button>
                       </Link>
                       <Link to="/register">
-                        <Button className="w-full">Get Started</Button>
+                        <Button 
+                          variant={location.pathname === '/register' ? 'default' : 'ghost'}
+                          className={`w-full justify-start ${location.pathname === '/register' ? 'bg-primary text-white' : ''}`}
+                        >
+                          Get Started
+                        </Button>
                       </Link>
                       <Button 
                         variant="ghost" 
