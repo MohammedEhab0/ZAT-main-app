@@ -43,10 +43,19 @@ export default function Navigation() {
             ) : (
               <>
                 <Link to="/login">
-                  <Button variant="ghost">Login</Button>
+                  <Button 
+                    variant="ghost"
+                    className={location.pathname === '/login' ? 'bg-accent' : ''}
+                  >
+                    Login
+                  </Button>
                 </Link>
                 <Link to="/register">
-                  <Button>Get Started</Button>
+                  <Button
+                    className={location.pathname === '/register' ? 'bg-accent' : ''}
+                  >
+                    Get Started
+                  </Button>
                 </Link>
                 {/* For demo purposes only - allows toggling the navigation state */}
                 <Button variant="ghost" size="sm" onClick={toggleLoginState} className="text-xs opacity-50">
