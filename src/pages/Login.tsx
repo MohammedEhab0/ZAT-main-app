@@ -89,9 +89,7 @@ export default function Login() {
                         </FormControl>
                         <FormMessage className="text-red-500" />
                         <div className="text-sm text-right">
-                          <a href="#" className="text-primary hover:underline">
-                            Forgot password?
-                          </a>
+                    
                         </div>
                       </FormItem>
                     )}
