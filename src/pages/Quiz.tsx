@@ -21,7 +21,7 @@ export default function Quiz() {
   useEffect(() => {
     if (timeLeft <= 0) {
       console.log("⏰ Time's up! Auto-submitting answers:", answers);
-      // You can add navigation or a completion screen here
+      window.location.href = "/report";
       return;
     }
 
@@ -55,7 +55,7 @@ export default function Quiz() {
       setSelectedValue("");
     } else {
       console.log("✅ Quiz completed, all answers:", newAnswers);
-      // Navigate to summary or show result
+      window.location.href = "/report";
     }
   };
 
