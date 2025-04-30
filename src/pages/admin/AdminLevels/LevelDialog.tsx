@@ -34,6 +34,9 @@ export default function LevelDialog({
           <DialogTitle>
             {isEditing ? "Edit Level" : "Add New Level"}
           </DialogTitle>
+          <DialogDescription>
+            {isEditing ? "Update the existing level details below." : "Enter the details for the new level."}
+          </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">

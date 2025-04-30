@@ -5,6 +5,9 @@ import {
   Sheet,
   SheetContent,
   SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 
@@ -83,6 +86,10 @@ export default function Navigation() {
                 </Button>
               </SheetTrigger>
               <SheetContent>
+                <SheetHeader>
+                  <SheetTitle>Navigation Menu</SheetTitle>
+                  <SheetDescription>Access all navigation options</SheetDescription>
+                </SheetHeader>
                 <div className="flex flex-col gap-4 py-4">
                   <Link 
                     to={isLoggedIn ? "/dashboard" : "/"} 
