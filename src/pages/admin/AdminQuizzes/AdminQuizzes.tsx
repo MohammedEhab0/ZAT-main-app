@@ -276,6 +276,9 @@ export default function AdminQuizzes() {
             <DialogTitle>
               {isEditing ? "Edit Question" : "Create New Question"}
             </DialogTitle>
+            <DialogDescription>
+              {isEditing ? "Modify the existing question details below." : "Fill in the details to create a new question."}
+            </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             {isEditing && (

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
@@ -12,7 +11,7 @@ import { Menu } from "lucide-react";
 export default function Navigation() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
-  
+
   const toggleLoginState = () => {
     setIsLoggedIn(!isLoggedIn);
   };
@@ -24,7 +23,7 @@ export default function Navigation() {
           <Link to={isLoggedIn ? "/dashboard" : "/"} className="text-2xl font-bold text-primary">
             ZAT
           </Link>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4">
             {isLoggedIn ? (
@@ -73,7 +72,7 @@ export default function Navigation() {
               </>
             )}
           </div>
-          
+
           {/* Mobile Navigation */}
           <div className="md:hidden">
             <Sheet>
@@ -91,7 +90,7 @@ export default function Navigation() {
                   >
                     SkillQuest
                   </Link>
-                  
+
                   {isLoggedIn ? (
                     <>
                       <Link to="/dashboard">

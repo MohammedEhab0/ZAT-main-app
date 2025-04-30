@@ -228,6 +228,9 @@ export default function AdminSkills() {
             <DialogTitle>
               {isEditing ? "Edit Skill" : "Add New Skill"}
             </DialogTitle>
+            <DialogDescription>
+              {isEditing ? "Update the existing skill details below." : "Enter the details for the new skill."}
+            </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
