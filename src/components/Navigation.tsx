@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
+import ZatBrand from "@/assets/images/ZatBrand.png";
 import {
   Sheet,
   SheetContent,
@@ -20,13 +21,15 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md border-b">
+      <div className="container mx-auto px-5 py-5">
+        <div className="flex items-center justify-between h-10">
           <Link
             to={isLoggedIn ? "/dashboard" : "/"}
-            className="text-2xl font-bold text-color #000000"
+            className="flex items-center text-5xl font-bold text-color #000000"
           >
+            <img src={ZatBrand} alt="ZAT Logo" className="h-16 w-22 mr-2" />{" "}
+            {/* Add the logo */}
             ZAT
           </Link>
 
@@ -41,8 +44,8 @@ export default function Navigation() {
                     }
                     className={
                       location.pathname === "/dashboard"
-                        ? "bg-primary text-white"
-                        : ""
+                        ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
+                        : "hover:bg-[#ac6af7] hover:text-white"
                     }
                   >
                     Dashboard
@@ -55,16 +58,18 @@ export default function Navigation() {
                     }
                     className={
                       location.pathname === "/quiz"
-                        ? "bg-primary text-white"
-                        : ""
+                        ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
+                        : "hover:bg-[#ac6af7] hover:text-white"
                     }
                   >
                     Take Quiz
                   </Button>
                 </Link>
-                <Button variant="ghost" onClick={toggleLoginState}>
-                  Logout
-                </Button>
+                <Link to="/">
+                  <Button variant="ghost" onClick={toggleLoginState}>
+                    Logout
+                  </Button>
+                </Link>
               </>
             ) : (
               <>
@@ -75,8 +80,8 @@ export default function Navigation() {
                     }
                     className={
                       location.pathname === "/login"
-                        ? "bg-primary text-white"
-                        : ""
+                        ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
+                        : "hover:bg-[#ac6af7] hover:text-white"
                     }
                   >
                     Login
@@ -89,8 +94,8 @@ export default function Navigation() {
                     }
                     className={
                       location.pathname === "/register"
-                        ? "bg-primary text-white"
-                        : ""
+                        ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
+                        : "hover:bg-[#ac6af7] hover:text-white"
                     }
                   >
                     Get Started
@@ -143,8 +148,8 @@ export default function Navigation() {
                           }
                           className={`w-full justify-start ${
                             location.pathname === "/dashboard"
-                              ? "bg-primary text-white"
-                              : ""
+                              ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
+                              : "hover:bg-[#ac6af7] hover:text-white"
                           }`}
                         >
                           Dashboard
@@ -157,16 +162,20 @@ export default function Navigation() {
                           }
                           className={`w-full justify-start ${
                             location.pathname === "/quiz"
-                              ? "bg-primary text-white"
-                              : ""
+                              ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
+                              : "hover:bg-[#ac6af7] hover:text-white"
                           }`}
                         >
                           Take Quiz
                         </Button>
                       </Link>
                       <Button
-                        variant="ghost"
-                        className="w-full justify-start"
+                        className={`w-full justify-start ${
+                          location.pathname === "/quiz"
+                            ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
+                            : "hover:bg-[#ac6af7] hover:text-white"
+                        }`}
+                        variant="default"
                         onClick={toggleLoginState}
                       >
                         Logout
@@ -181,8 +190,8 @@ export default function Navigation() {
                           }
                           className={`w-full justify-start ${
                             location.pathname === "/login"
-                              ? "bg-primary text-white"
-                              : ""
+                              ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
+                              : "hover:bg-[#ac6af7] hover:text-white"
                           }`}
                         >
                           Login
@@ -197,8 +206,8 @@ export default function Navigation() {
                           }
                           className={`w-full justify-start ${
                             location.pathname === "/register"
-                              ? "bg-primary text-white"
-                              : ""
+                              ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
+                              : "hover:bg-[#ac6af7] hover:text-white"
                           }`}
                         >
                           Get Started
