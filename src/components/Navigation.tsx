@@ -23,7 +23,10 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to={isLoggedIn ? "/dashboard" : "/"} className="text-2xl font-bold text-primary">
+          <Link
+            to={isLoggedIn ? "/dashboard" : "/"}
+            className="text-2xl font-bold text-color #000000"
+          >
             ZAT
           </Link>
 
@@ -32,17 +35,29 @@ export default function Navigation() {
             {isLoggedIn ? (
               <>
                 <Link to="/dashboard">
-                  <Button 
-                    variant={location.pathname === '/dashboard' ? 'default' : 'ghost'}
-                    className={location.pathname === '/dashboard' ? 'bg-primary text-white' : ''}
+                  <Button
+                    variant={
+                      location.pathname === "/dashboard" ? "default" : "ghost"
+                    }
+                    className={
+                      location.pathname === "/dashboard"
+                        ? "bg-primary text-white"
+                        : ""
+                    }
                   >
                     Dashboard
                   </Button>
                 </Link>
                 <Link to="/quiz">
-                  <Button 
-                    variant={location.pathname === '/quiz' ? 'default' : 'ghost'}
-                    className={location.pathname === '/quiz' ? 'bg-primary text-white' : ''}
+                  <Button
+                    variant={
+                      location.pathname === "/quiz" ? "default" : "ghost"
+                    }
+                    className={
+                      location.pathname === "/quiz"
+                        ? "bg-primary text-white"
+                        : ""
+                    }
                   >
                     Take Quiz
                   </Button>
@@ -54,22 +69,39 @@ export default function Navigation() {
             ) : (
               <>
                 <Link to="/login">
-                  <Button 
-                    variant={location.pathname === '/login' ? 'default' : 'ghost'}
-                    className={location.pathname === '/login' ? 'bg-primary text-white' : ''}
+                  <Button
+                    variant={
+                      location.pathname === "/login" ? "default" : "ghost"
+                    }
+                    className={
+                      location.pathname === "/login"
+                        ? "bg-primary text-white"
+                        : ""
+                    }
                   >
                     Login
                   </Button>
                 </Link>
                 <Link to="/register">
                   <Button
-                    variant={location.pathname === '/register' ? 'default' : 'ghost'}
-                    className={location.pathname === '/register' ? 'bg-primary text-white' : ''}
+                    variant={
+                      location.pathname === "/register" ? "default" : "ghost"
+                    }
+                    className={
+                      location.pathname === "/register"
+                        ? "bg-primary text-white"
+                        : ""
+                    }
                   >
                     Get Started
                   </Button>
                 </Link>
-                <Button variant="ghost" size="sm" onClick={toggleLoginState} className="text-xs opacity-50">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={toggleLoginState}
+                  className="text-xs opacity-50"
+                >
                   Demo: Switch to logged-in view
                 </Button>
               </>
@@ -88,11 +120,13 @@ export default function Navigation() {
               <SheetContent>
                 <SheetHeader>
                   <SheetTitle>Navigation Menu</SheetTitle>
-                  <SheetDescription>Access all navigation options</SheetDescription>
+                  <SheetDescription>
+                    Access all navigation options
+                  </SheetDescription>
                 </SheetHeader>
                 <div className="flex flex-col gap-4 py-4">
-                  <Link 
-                    to={isLoggedIn ? "/dashboard" : "/"} 
+                  <Link
+                    to={isLoggedIn ? "/dashboard" : "/"}
                     className="text-2xl font-bold text-primary mb-6"
                   >
                     SkillQuest
@@ -101,23 +135,37 @@ export default function Navigation() {
                   {isLoggedIn ? (
                     <>
                       <Link to="/dashboard">
-                        <Button 
-                          variant={location.pathname === '/dashboard' ? 'default' : 'ghost'}
-                          className={`w-full justify-start ${location.pathname === '/dashboard' ? 'bg-primary text-white' : ''}`}
+                        <Button
+                          variant={
+                            location.pathname === "/dashboard"
+                              ? "default"
+                              : "ghost"
+                          }
+                          className={`w-full justify-start ${
+                            location.pathname === "/dashboard"
+                              ? "bg-primary text-white"
+                              : ""
+                          }`}
                         >
                           Dashboard
                         </Button>
                       </Link>
                       <Link to="/quiz">
-                        <Button 
-                          variant={location.pathname === '/quiz' ? 'default' : 'ghost'}
-                          className={`w-full justify-start ${location.pathname === '/quiz' ? 'bg-primary text-white' : ''}`}
+                        <Button
+                          variant={
+                            location.pathname === "/quiz" ? "default" : "ghost"
+                          }
+                          className={`w-full justify-start ${
+                            location.pathname === "/quiz"
+                              ? "bg-primary text-white"
+                              : ""
+                          }`}
                         >
                           Take Quiz
                         </Button>
                       </Link>
-                      <Button 
-                        variant="ghost" 
+                      <Button
+                        variant="ghost"
                         className="w-full justify-start"
                         onClick={toggleLoginState}
                       >
@@ -127,25 +175,39 @@ export default function Navigation() {
                   ) : (
                     <>
                       <Link to="/login">
-                        <Button 
-                          variant={location.pathname === '/login' ? 'default' : 'ghost'}
-                          className={`w-full justify-start ${location.pathname === '/login' ? 'bg-primary text-white' : ''}`}
+                        <Button
+                          variant={
+                            location.pathname === "/login" ? "default" : "ghost"
+                          }
+                          className={`w-full justify-start ${
+                            location.pathname === "/login"
+                              ? "bg-primary text-white"
+                              : ""
+                          }`}
                         >
                           Login
                         </Button>
                       </Link>
                       <Link to="/register">
-                        <Button 
-                          variant={location.pathname === '/register' ? 'default' : 'ghost'}
-                          className={`w-full justify-start ${location.pathname === '/register' ? 'bg-primary text-white' : ''}`}
+                        <Button
+                          variant={
+                            location.pathname === "/register"
+                              ? "default"
+                              : "ghost"
+                          }
+                          className={`w-full justify-start ${
+                            location.pathname === "/register"
+                              ? "bg-primary text-white"
+                              : ""
+                          }`}
                         >
                           Get Started
                         </Button>
                       </Link>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        onClick={toggleLoginState} 
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={toggleLoginState}
                         className="text-xs opacity-50 w-full justify-start mt-4"
                       >
                         Demo: Switch to logged-in view
