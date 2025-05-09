@@ -17,6 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -277,7 +278,9 @@ export default function AdminQuizzes() {
               {isEditing ? "Edit Question" : "Create New Question"}
             </DialogTitle>
             <DialogDescription>
-              {isEditing ? "Modify the existing question details below." : "Fill in the details to create a new question."}
+              {isEditing
+                ? "Modify the existing question details below."
+                : "Fill in the details to create a new question."}
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">

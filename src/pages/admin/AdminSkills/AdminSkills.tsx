@@ -18,6 +18,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -229,7 +230,9 @@ export default function AdminSkills() {
               {isEditing ? "Edit Skill" : "Add New Skill"}
             </DialogTitle>
             <DialogDescription>
-              {isEditing ? "Update the existing skill details below." : "Enter the details for the new skill."}
+              {isEditing
+                ? "Update the existing skill details below."
+                : "Enter the details for the new skill."}
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">

@@ -4,6 +4,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -35,7 +36,9 @@ export default function LevelDialog({
             {isEditing ? "Edit Level" : "Add New Level"}
           </DialogTitle>
           <DialogDescription>
-            {isEditing ? "Update the existing level details below." : "Enter the details for the new level."}
+            {isEditing
+              ? "Update the existing level details below."
+              : "Enter the details for the new level."}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
