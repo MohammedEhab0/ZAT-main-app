@@ -35,43 +35,38 @@ export default function Index() {
 
       {/* Carousel */}
       <Carousel
+        opts={{ align: "start", loop: true }}
+        orientation={window.innerWidth < 840 ? "vertical" : "horizontal"} // Horizontal for medium and above, vertical for small screens
         plugins={[plugin.current]}
-        className=" h-4/5"
+        className="h-fit"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
       >
-        <CarouselPrevious className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-[#5300B3] p-2 rounded-full shadow-md hover:bg-[#ac6af7]" />
+        <CarouselPrevious className=" left-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 text-[#5300B3] hover:text-[#5300B3]" />
 
-        <CarouselContent>
+        <CarouselContent className="  my-9  ">
           {/* Hero Section */}
-          <CarouselItem className="w-full h-full">
+          <CarouselItem className="  ">
             <section
-              className="hero pt-20 pb-10 px-4 mt-3"
+              className="hero mt-9  px-4 my-auto bg-cover"
               style={{ backgroundImage: `url(${bgHero})` }}
             >
-              <div className="container mx-auto text-center  flex-col items-center justify-around">
+              <div className="container  text-center  flex-col items-center justify-around">
                 <div className="container mx-auto  flex justify-center items-center">
-                  <img src={yhero} alt="heroMan" className="relative w-5/6 " />
-
-                  <img src={Man} alt="heroMan" className="absolute w-3/5" />
-                  <Link
-                    className="absolute left-10 bottom-20 text-clip"
-                    to="/register"
-                  >
-                    <span className=" text-left text-3xl md:text-7xl  mb-8 text-[#5300B3]">
-                      Start
-                      <br /> Now
-                    </span>
+                  <Link className="" to="/register">
+                    <img src={yhero} alt="y-bg" className="relative  w-full " />
                   </Link>
+
+                  <img src={Man} alt="heroMan" className="absolute  w-3/5" />
                 </div>
               </div>
             </section>
           </CarouselItem>
 
           {/* How It Works Section */}
-          <CarouselItem className="w-full m-3">
+          <CarouselItem className=" my-3 h-full w-full">
             <section className="how-it-works pt-[4rem] ">
-              <div className="container mx-auto text-center">
+              <div className="container  text-center ">
                 <h2 className="bg-[#5300B3] text-[#FFF200] text-3xl md:text-6xl font-bold  py-4">
                   How It Works
                 </h2>
@@ -90,8 +85,8 @@ export default function Index() {
           </CarouselItem>
 
           {/* About Us Section */}
-          <CarouselItem>
-            <section className="about-us py-20 px-4 bg-white m-3">
+          <CarouselItem className="about">
+            <section className="about py-20 px-4 bg-white m-3">
               <div className="container mx-auto text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-8">
                   About Us
@@ -107,7 +102,7 @@ export default function Index() {
           </CarouselItem>
 
           {/* Features Section */}
-          <CarouselItem>
+          <CarouselItem className="assessment">
             <section className="Assessment py-20 px-4 bg-white m-3">
               <div className="container mx-auto">
                 <div className="grid md:grid-cols-2 gap-12">
@@ -141,7 +136,7 @@ export default function Index() {
           </CarouselItem>
 
           {/* Contact Us Section */}
-          <CarouselItem>
+          <CarouselItem className="contact">
             <section className="contact-us py-20 px-4 bg-gray-100 m-3">
               <div className="container mx-auto text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-8">
@@ -163,7 +158,7 @@ export default function Index() {
 
         {/* Carousel Controls */}
 
-        <CarouselNext className="border-spacing-1  absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-[#5300B3] p-2 rounded-full shadow-md hover:bg-[#ac6af7] " />
+        <CarouselNext className="border-spacing-1   right-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-200 text-[#5300B3] p-2 rounded-full shadow-md hover:bg-gray-300 hover:text-[#5300B3]" />
       </Carousel>
     </div>
   );

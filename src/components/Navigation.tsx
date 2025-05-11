@@ -21,14 +21,18 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md border-b">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md border-b ">
       <div className="container mx-auto px-5 py-5">
-        <div className="flex items-center justify-between h-10">
+        <div className="flex items-center justify-between h-3 md:h-8">
           <Link
             to={isLoggedIn ? "/dashboard" : "/"}
-            className="flex items-center text-5xl font-bold text-color #000000"
+            className="flex items-center text-2xl md:text-5xl font-bold text-color #000000"
           >
-            <img src={ZatBrand} alt="ZAT Logo" className="h-16 w-22 mr-2" />{" "}
+            <img
+              src={ZatBrand}
+              alt="ZAT Logo"
+              className="h-8 md:h-16 w-22 mr-2"
+            />{" "}
             {/* Add the logo */}
             ZAT
           </Link>
@@ -87,6 +91,7 @@ export default function Navigation() {
                     Login
                   </Button>
                 </Link>
+
                 <Link to="/register">
                   <Button
                     variant={

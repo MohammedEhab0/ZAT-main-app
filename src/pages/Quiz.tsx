@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider"; // Import your slider component
 import { quizQuestions, skills } from "@/data/dummyData";
 
 export default function Quiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
-  const [selectedValue, setSelectedValue] = useState<string>("");
+  const [selectedValue, setSelectedValue] = useState<string>("50"); // Default to 50
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
 
   const totalQuestions = quizQuestions.length;
   const totalTimeInSeconds = totalQuestions * 30;
   const [timeLeft, setTimeLeft] = useState(totalTimeInSeconds);
   const currentQuestion = quizQuestions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+  const progress = (currentQuestionIndex / totalQuestions) * 100;
 
   useEffect(() => {
     if (timeLeft <= 0) {
       console.log("⏰ Time's up! Auto-submitting answers:", answers);
-      window.location.href = "/report";
+      navigate("/report"); // Use navigate instead of window.location.href
       return;
     }
 
@@ -30,7 +31,7 @@ export default function Quiz() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft, answers]);
+  }, [timeLeft, answers, navigate]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -47,15 +48,21 @@ export default function Quiz() {
   const handleNext = () => {
     if (!selectedValue) return;
 
-    const newAnswers = [...answers, selectedValue];
+    const leftPercentage = 100 - parseInt(selectedValue);
+    const rightPercentage = parseInt(selectedValue);
+    const answer = `${leftPercentage}% ${getSkillName(
+      currentQuestion.skillLeft
+    )} / ${rightPercentage}% ${getSkillName(currentQuestion.skillRight)}`;
+
+    const newAnswers = [...answers, answer];
     setAnswers(newAnswers);
 
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setSelectedValue("");
+      setSelectedValue("50"); // Reset the slider to default
     } else {
       console.log("✅ Quiz completed, all answers:", newAnswers);
-      window.location.href = "/report";
+      navigate("/report"); // Use navigate instead of window.location.href
     }
   };
 
@@ -64,7 +71,7 @@ export default function Quiz() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-light to-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#5300B3] to-white">
       <Navigation />
 
       <div className="pt-32 pb-20 px-4">
@@ -72,7 +79,7 @@ export default function Quiz() {
           {/* Timer */}
           <div className="text-center text-lg mb-2 text-muted-foreground font-semibold">
             Time Left:{" "}
-            <span className="text-primary">{formatTime(timeLeft)}</span>
+            <span className="text-[#5300B3]">{formatTime(timeLeft)}</span>
           </div>
 
           <div className="mb-3">
@@ -114,42 +121,40 @@ export default function Quiz() {
                 </div>
               </div>
 
-              {/* Answer Options */}
-              <RadioGroup
-                value={selectedValue}
-                onValueChange={setSelectedValue}
-                className="space-y-4"
-              >
-                {[
-                  { value: "100-0", left: 100, right: 0 },
-                  { value: "75-25", left: 75, right: 25 },
-                  { value: "50-50", left: 50, right: 50 },
-                  { value: "25-75", left: 25, right: 75 },
-                  { value: "0-100", left: 0, right: 100 },
-                ].map(({ value, left, right }, i) => (
-                  <div className="flex items-center space-x-2" key={i}>
-                    <RadioGroupItem value={value} id={`r${i}`} />
-                    <Label htmlFor={`r${i}`} className="text-base">
-                      {left}% {getSkillName(currentQuestion.skillLeft)} /{" "}
-                      {right}% {getSkillName(currentQuestion.skillRight)}
-                    </Label>
-                  </div>
-                ))}
-              </RadioGroup>
+              {/* Slider for Answer Options */}
+              <div className="flex flex-col items-center space-y-4">
+                <Slider
+                  value={[parseInt(selectedValue)]} // Default to 50-50
+                  onValueChange={(value) =>
+                    setSelectedValue(value[0].toString())
+                  }
+                  step={25} // Each step represents one choice
+                  min={0}
+                  max={100}
+                  className="w-full"
+                />
+                <div className="flex justify-between w-full text-sm font-medium">
+                  <span>Very Agree</span>
+                  <span>Agree</span>
+                  <span>Neutral</span>
+                  <span>Agree</span>
+                  <span>Very Agree</span>
+                </div>
+              </div>
             </CardContent>
-          </Card>
 
-          <div className="flex justify-end">
-            <Button
-              onClick={handleNext}
-              disabled={!selectedValue}
-              className="transition-all duration-200 hover:scale-105"
-            >
-              {currentQuestionIndex === totalQuestions - 1
-                ? "Complete Quiz"
-                : "Next Question"}
-            </Button>
-          </div>
+            <div className="flex justify-center my-4">
+              <Button
+                onClick={handleNext}
+                disabled={!selectedValue}
+                className="transition-all duration-200 hover:scale-105"
+              >
+                {currentQuestionIndex === totalQuestions - 1
+                  ? "Complete Quiz"
+                  : "Next Question"}
+              </Button>
+            </div>
+          </Card>
         </div>
       </div>
     </div>
