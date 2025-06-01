@@ -8,7 +8,6 @@ import {
   SheetTrigger,
   SheetHeader,
   SheetTitle,
-  SheetDescription,
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 
@@ -19,6 +18,13 @@ export default function Navigation() {
   const toggleLoginState = () => {
     setIsLoggedIn(!isLoggedIn);
   };
+
+  // Section links for Index.tsx
+  const sectionLinks = [
+    { to: "#story-us", label: "Story of Us" },
+    { to: "#features", label: "Assesement" },
+    { to: "#register", label: "Register" },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md border-b ">
@@ -32,13 +38,40 @@ export default function Navigation() {
               src={ZatBrand}
               alt="ZAT Logo"
               className="h-8 md:h-16 w-22 mr-2"
-            />{" "}
-            {/* Add the logo */}
+            />
             ZAT
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4">
+            {!isLoggedIn && (
+              <>
+                {/* Section Links */}
+                {sectionLinks.map((link) => (
+                  <a
+                    key={link.to}
+                    href={link.to}
+                    className={
+                      location.hash === link.to
+                        ? "bg-[#5300B3] text-white hover:bg-[#5300B3] rounded-md px-3 py-2 transition-colors font-bold"
+                        : "hover:bg-[#ac6af7] hover:text-white rounded-md px-3 py-2 transition-colors font-bold"
+                    }
+                  >
+                    {link.label}
+                  </a>
+                ))}
+
+                {/* Demo Button */}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={toggleLoginState}
+                  className="text-xs opacity-50 transition delay-150 duration-300 ease-in-out"
+                >
+                  Demo: Switch to logged-in view
+                </Button>
+              </>
+            )}
             {isLoggedIn ? (
               <>
                 <Link to="/dashboard">
@@ -75,73 +108,50 @@ export default function Navigation() {
                   </Button>
                 </Link>
               </>
-            ) : (
-              <>
-                <Link to="/login">
-                  <Button
-                    variant={
-                      location.pathname === "/login" ? "default" : "ghost"
-                    }
-                    className={
-                      location.pathname === "/login"
-                        ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
-                        : "hover:bg-[#ac6af7] hover:text-white"
-                    }
-                  >
-                    Login
-                  </Button>
-                </Link>
-
-                <Link to="/register">
-                  <Button
-                    variant={
-                      location.pathname === "/register" ? "default" : "ghost"
-                    }
-                    className={
-                      location.pathname === "/register"
-                        ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
-                        : "hover:bg-[#ac6af7] hover:text-white"
-                    }
-                  >
-                    Get Started
-                  </Button>
-                </Link>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={toggleLoginState}
-                  className="text-xs opacity-50"
-                >
-                  Demo: Switch to logged-in view
-                </Button>
-              </>
-            )}
+            ) : null}
           </div>
 
           {/* Mobile Navigation */}
-          <div className="md:hidden">
+          <div className="md:hidden bg-transparent backdrop-blur-md">
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-7 w-7 text-[#5300B3]" />
                   <span className="sr-only">Open menu</span>
                 </Button>
               </SheetTrigger>
               <SheetContent>
-                <SheetHeader>
-                  <SheetTitle>Navigation Menu</SheetTitle>
-                  <SheetDescription>
-                    Access all navigation options
-                  </SheetDescription>
+                <SheetHeader className="flex  flex-row items-center justify-center gap-2">
+                  <SheetTitle className="text-4xl font-bold">ZAT</SheetTitle>
+                  <img src={ZatBrand} alt="ZAT Logo" className="size-9" />
                 </SheetHeader>
                 <div className="flex flex-col gap-4 py-4">
-                  <Link
-                    to={isLoggedIn ? "/dashboard" : "/"}
-                    className="text-2xl font-bold text-primary mb-6"
-                  >
-                    SkillQuest
-                  </Link>
+                  {!isLoggedIn && (
+                    <>
+                      {sectionLinks.map((link) => (
+                        <a
+                          key={link.to}
+                          href={link.to}
+                          className={
+                            location.hash === link.to
+                              ? "bg-[#5300B3] text-white hover:bg-[#5300B3] rounded-md px-3 py-2 transition-colors"
+                              : "hover:bg-[#ac6af7] hover:text-white rounded-md px-3 py-2 transition-colors"
+                          }
+                        >
+                          {link.label}
+                        </a>
+                      ))}
 
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={toggleLoginState}
+                        className="text-xs opacity-50 w-full justify-start mt-4"
+                      >
+                        Demo: Switch to logged-in view
+                      </Button>
+                    </>
+                  )}
                   {isLoggedIn ? (
                     <>
                       <Link to="/dashboard">
@@ -174,60 +184,17 @@ export default function Navigation() {
                           Take Quiz
                         </Button>
                       </Link>
-                      <Button
-                        className={`w-full justify-start ${
-                          location.pathname === "/quiz"
-                            ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
-                            : "hover:bg-[#ac6af7] hover:text-white"
-                        }`}
-                        variant="default"
-                        onClick={toggleLoginState}
-                      >
-                        Logout
-                      </Button>
-                    </>
-                  ) : (
-                    <>
-                      <Link to="/login">
+                      <Link to="/">
                         <Button
-                          variant={
-                            location.pathname === "/login" ? "default" : "ghost"
-                          }
-                          className={`w-full justify-start ${
-                            location.pathname === "/login"
-                              ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
-                              : "hover:bg-[#ac6af7] hover:text-white"
-                          }`}
+                          variant="ghost"
+                          onClick={toggleLoginState}
+                          className="w-full justify-start hover:bg-[#ac6af7] hover:text-white"
                         >
-                          Login
+                          Logout
                         </Button>
                       </Link>
-                      <Link to="/register">
-                        <Button
-                          variant={
-                            location.pathname === "/register"
-                              ? "default"
-                              : "ghost"
-                          }
-                          className={`w-full justify-start ${
-                            location.pathname === "/register"
-                              ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
-                              : "hover:bg-[#ac6af7] hover:text-white"
-                          }`}
-                        >
-                          Get Started
-                        </Button>
-                      </Link>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={toggleLoginState}
-                        className="text-xs opacity-50 w-full justify-start mt-4"
-                      >
-                        Demo: Switch to logged-in view
-                      </Button>
                     </>
-                  )}
+                  ) : null}
                 </div>
               </SheetContent>
             </Sheet>

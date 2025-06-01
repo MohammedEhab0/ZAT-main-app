@@ -203,13 +203,15 @@ export default function AdminQuizzes() {
       </div>
 
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div className="flex items-center gap-2">
+        <CardHeader className="flex flex-row items-center justify-between flex-wrap">
+          <div className="flex items-center gap-2 ">
             <FileQuestion className="h-5 w-5" />
-            <CardTitle>Assessment Questions</CardTitle>
+            <CardTitle className="text-lg md:text-3xl">
+              Assessment Questions
+            </CardTitle>
           </div>
           <Button
-            className="flex items-center gap-2"
+            className="flex items-center  gap-1 bg-[#5300B3] text-white hover:bg-[#ac6af7] text-sm md:text-lg"
             onClick={() => handleOpenDialog()}
           >
             <Plus className="h-4 w-4" />
@@ -442,7 +444,11 @@ export default function AdminQuizzes() {
             </Collapsible>
           </div>
           <DialogFooter>
-            <Button type="submit" onClick={handleSaveQuestion}>
+            <Button
+              type="submit"
+              onClick={handleSaveQuestion}
+              className="bg-[#5300B3] text-white hover:bg-[#ac6af7] text-sm md:text-lg "
+            >
               {isEditing ? "Save Changes" : "Create Question"}
             </Button>
           </DialogFooter>

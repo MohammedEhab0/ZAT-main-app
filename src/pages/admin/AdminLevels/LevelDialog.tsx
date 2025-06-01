@@ -85,7 +85,10 @@ export default function LevelDialog({
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={onSave}>
+          <Button
+            onClick={onSave}
+            className="bg-[#5300B3] text-white hover:bg-[#ac6af7]"
+          >
             {isEditing ? "Save Changes" : "Add Level"}
           </Button>
         </DialogFooter>

@@ -99,10 +99,10 @@ export default function AdminLevels() {
       </div>
 
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Skill Levels</CardTitle>
+        <CardHeader className="flex flex-row items-center justify-between flex-wrap">
+          <CardTitle className="text-lg md:text-3xl">Skill Levels</CardTitle>
           <Button
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 bg-[#5300B3] text-white hover:bg-[#ac6af7]"
             onClick={() => handleOpenDialog()}
           >
             <Plus className="h-4 w-4" />

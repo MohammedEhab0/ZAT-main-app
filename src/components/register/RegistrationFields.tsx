@@ -1,8 +1,23 @@
-
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon } from "lucide-react";
@@ -19,10 +34,10 @@ const RegistrationFields = ({ form }: RegistrationFieldsProps) => {
     <div className="grid grid-cols-2 gap-4">
       <FormField
         control={form.control}
-        name="name"
+        name="firstName"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Full Name</FormLabel>
+            <FormLabel>Frist Name</FormLabel>
             <FormControl>
               <Input placeholder="John Doe" {...field} />
             </FormControl>
@@ -30,54 +45,78 @@ const RegistrationFields = ({ form }: RegistrationFieldsProps) => {
           </FormItem>
         )}
       />
-
       <FormField
         control={form.control}
-        name="age"
+        name="lastName"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Age</FormLabel>
+            <FormLabel>Last Name</FormLabel>
             <FormControl>
-              <Input type="number" placeholder="25" {...field} />
+              <Input placeholder="John Doe" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
         )}
       />
-
       <FormField
         control={form.control}
-        name="phone"
+        name="countryCode"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Country Code</FormLabel>
+            <Select
+              onValueChange={field.onChange}
+              defaultValue={typeof field.value === "string" ? field.value : ""}
+            >
+              <FormControl>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select country code" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                <SelectItem value="+1">United States (+1)</SelectItem>
+                <SelectItem value="+44">United Kingdom (+44)</SelectItem>
+                <SelectItem value="+91">India (+91)</SelectItem>
+                <SelectItem value="+61">Australia (+61)</SelectItem>
+                <SelectItem value="+81">Japan (+81)</SelectItem>
+                <SelectItem value="+49">Germany (+49)</SelectItem>
+                <SelectItem value="+33">France (+33)</SelectItem>
+                <SelectItem value="+86">China (+86)</SelectItem>
+                <SelectItem value="+7">Russia (+7)</SelectItem>
+                <SelectItem value="+27">South Africa (+27)</SelectItem>
+                <SelectItem value="+82">South Korea (+82)</SelectItem>
+                <SelectItem value="+39">Italy (+39)</SelectItem>
+                <SelectItem value="+34">Spain (+34)</SelectItem>
+                <SelectItem value="+20">Egypt (+20)</SelectItem>
+                <SelectItem value="+966">Saudi Arabia (+966)</SelectItem>
+                <SelectItem value="+971">
+                  United Arab Emirates (+971)
+                </SelectItem>
+                <SelectItem value="+212">Morocco (+212)</SelectItem>
+                <SelectItem value="+213">Algeria (+213)</SelectItem>
+                <SelectItem value="+216">Tunisia (+216)</SelectItem>
+                <SelectItem value="+962">Jordan (+962)</SelectItem>
+                <SelectItem value="+961">Lebanon (+961)</SelectItem>
+                <SelectItem value="+965">Kuwait (+965)</SelectItem>
+                <SelectItem value="+973">Bahrain (+973)</SelectItem>
+                <SelectItem value="+968">Oman (+968)</SelectItem>
+                <SelectItem value="+974">Qatar (+974)</SelectItem>
+                {/* Add more country codes as needed */}
+              </SelectContent>
+            </Select>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="phoneNumber"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Phone Number</FormLabel>
             <FormControl>
-              <Input placeholder="+1 (555) 123-4567" {...field} />
+              <Input placeholder=" (555) 123-4567" {...field} />
             </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="gender"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Gender</FormLabel>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select gender" />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                <SelectItem value="male">Male</SelectItem>
-                <SelectItem value="female">Female</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
-                <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-              </SelectContent>
-            </Select>
             <FormMessage />
           </FormItem>
         )}
@@ -90,7 +129,11 @@ const RegistrationFields = ({ form }: RegistrationFieldsProps) => {
           <FormItem>
             <FormLabel>Email</FormLabel>
             <FormControl>
-              <Input type="email" placeholder="your.email@example.com" {...field} />
+              <Input
+                type="email"
+                placeholder="your.email@example.com"
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -106,71 +149,6 @@ const RegistrationFields = ({ form }: RegistrationFieldsProps) => {
             <FormControl>
               <Input type="password" placeholder="••••••••" {...field} />
             </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="dob"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Date of Birth</FormLabel>
-            <Popover>
-              <PopoverTrigger asChild>
-                <FormControl>
-                  <Button
-                    variant={"outline"}
-                    className={`w-full pl-3 text-left font-normal ${
-                      !field.value ? "text-muted-foreground" : ""
-                    }`}
-                  >
-                    {field.value ? (
-                      format(field.value, "PPP")
-                    ) : (
-                      <span>Pick a date</span>
-                    )}
-                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                  </Button>
-                </FormControl>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={field.value}
-                  onSelect={field.onChange}
-                  disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="education"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Education Level</FormLabel>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select education level" />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                <SelectItem value="high-school">High School</SelectItem>
-                <SelectItem value="associates">Associate's Degree</SelectItem>
-                <SelectItem value="bachelors">Bachelor's Degree</SelectItem>
-                <SelectItem value="masters">Master's Degree</SelectItem>
-                <SelectItem value="doctorate">Doctorate</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
-              </SelectContent>
-            </Select>
             <FormMessage />
           </FormItem>
         )}

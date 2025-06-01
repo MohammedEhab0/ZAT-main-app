@@ -31,6 +31,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
+import { clsx } from "clsx";
 
 interface Skill {
   id: string;
@@ -146,10 +147,10 @@ export default function AdminSkills() {
       </div>
 
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Skills Library</CardTitle>
+        <CardHeader className="flex flex-row items-center justify-between text-lg md:text-3xl">
+          <CardTitle className="text-xl md:text-3xl">Skills Library</CardTitle>
           <Button
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 bg-[#5300B3] text-white hover:bg-[#ac6af7]"
             onClick={() => handleOpenDialog()}
           >
             <Plus className="h-4 w-4" />
@@ -308,7 +309,11 @@ export default function AdminSkills() {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" onClick={handleSaveSkill}>
+            <Button
+              type="submit"
+              onClick={handleSaveSkill}
+              className="bg-[#5300B3] text-white hover:bg-[#ac6af7]"
+            >
               {isEditing ? "Save Changes" : "Add Skill"}
             </Button>
           </DialogFooter>

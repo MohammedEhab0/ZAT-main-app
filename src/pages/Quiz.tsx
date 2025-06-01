@@ -74,8 +74,8 @@ export default function Quiz() {
     <div className="min-h-screen bg-gradient-to-b from-[#5300B3] to-white">
       <Navigation />
 
-      <div className="pt-32 pb-20 px-4">
-        <div className="container mx-auto max-w-4xl">
+      <div className="pt-32 pb-20">
+        <div className="container mx-auto max-w-5xl">
           {/* Timer */}
           <div className="text-center text-lg mb-2 text-muted-foreground font-semibold">
             Time Left:{" "}
@@ -133,7 +133,7 @@ export default function Quiz() {
                   max={100}
                   className="w-full"
                 />
-                <div className="flex justify-between w-full text-sm font-medium">
+                <div className="flex justify-between w-full text-sm font-normal">
                   <span>Very Agree</span>
                   <span>Agree</span>
                   <span>Neutral</span>

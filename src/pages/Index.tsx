@@ -1,21 +1,12 @@
-"use client";
-
+// src/pages/Index.tsx
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
-
-import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+
 import bgHero from "@/assets/images/bgHero.png";
-import Man from "@/assets/images/man.png";
-import yhero from "@/assets/images/y-hero.png";
-import create from "@/assets/images/create.png";
-import receive from "@/assets/images/receive.png";
-import take from "@/assets/images/Take.png";
-import arrowLeft from "@/assets/images/arrowLeft.png";
-import arrowRight from "@/assets/images/arrowRight.png";
 import bgHowItWork from "@/assets/images/bg-howItWork.png";
+import bgAboutUS from "@/assets/images/aboutUs-bg.png";
+
 import {
   Carousel,
   CarouselContent,
@@ -23,143 +14,187 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
+// Static Section Components
+import HeroSection from "@/components/sections/HeroSection";
+import HowItWorksSection from "@/components/sections/HowItWorkSection";
+import StoryUsSection from "@/components/sections/StoryUsSection";
+import FeaturesSection from "@/components/sections/FeaturSection";
+
+// Lazy Loaded Components
+const HeroSection2 = React.lazy(
+  () => import("@/components/sections/HeroSection2")
+);
+const Login = React.lazy(() => import("@/pages/Login"));
+const Register = React.lazy(() => import("@/pages/Register"));
 
 export default function Index() {
   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
+  const [isLargeScreen, setIsLargeScreen] = React.useState(
+    window.innerWidth >= 900
+  );
+
+  // --- NEW: State to control the active tab ---
+  const [activeTab, setActiveTab] = React.useState("register"); // Default to 'register' tab
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth >= 900);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // --- NEW: Function to switch to login tab after successful registration ---
+  const handleRegistrationSuccess = () => {
+    setActiveTab("login");
+    // Optionally scroll to the tabs section if it's not visible
+    document
+      .getElementById("register-login-section")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div className="min-h-screen">
+    <div>
       <Navigation />
 
-      {/* Carousel */}
       <Carousel
         opts={{ align: "start", loop: true }}
-        orientation={window.innerWidth < 840 ? "vertical" : "horizontal"} // Horizontal for medium and above, vertical for small screens
+        orientation="horizontal"
         plugins={[plugin.current]}
         className="h-fit"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
       >
-        <CarouselPrevious className=" left-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 text-[#5300B3] hover:text-[#5300B3]" />
+        <CarouselPrevious
+          aria-label="Previous Slide"
+          className="left-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 text-[#5300B3] hover:text-[#5300B3] animate-bounce"
+        />
 
-        <CarouselContent className="  my-9  ">
-          {/* Hero Section */}
-          <CarouselItem className="  ">
-            <section
-              className="hero mt-9  px-4 my-auto bg-cover"
-              style={{ backgroundImage: `url(${bgHero})` }}
-            >
-              <div className="container  text-center  flex-col items-center justify-around">
-                <div className="container mx-auto  flex justify-center items-center">
-                  <Link className="" to="/register">
-                    <img src={yhero} alt="y-bg" className="relative  w-full " />
-                  </Link>
-
-                  <img src={Man} alt="heroMan" className="absolute  w-3/5" />
-                </div>
-              </div>
-            </section>
+        <CarouselContent>
+          <CarouselItem
+            id="hero1"
+            className="flex items-center w-full"
+            style={{
+              backgroundImage: `url(${bgHero})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <HeroSection />
           </CarouselItem>
 
-          {/* How It Works Section */}
-          <CarouselItem className=" my-3 h-full w-full">
-            <section className="how-it-works pt-[4rem] ">
-              <div className="container  text-center ">
-                <h2 className="bg-[#5300B3] text-[#FFF200] text-3xl md:text-6xl font-bold  py-4">
-                  How It Works
-                </h2>
-                <div
-                  className="grid grid-cols-5 md:grid-cols-5 bg-cover bg-center py-4"
-                  style={{ backgroundImage: `url(${bgHowItWork})` }}
-                >
-                  <img src={create} alt="Create Account" className="w-4/5" />
-                  <img src={arrowLeft} alt="Arrow Left" className="w-2/5" />
-                  <img src={take} alt="Take Quiz" className="w-4/5" />
-                  <img src={arrowRight} alt="Arrow Right" className="w-2/5" />
-                  <img src={receive} alt="Receive Results" className="w-4/5" />
-                </div>
-              </div>
-            </section>
-          </CarouselItem>
-
-          {/* About Us Section */}
-          <CarouselItem className="about">
-            <section className="about py-20 px-4 bg-white m-3">
-              <div className="container mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-8">
-                  About Us
-                </h2>
-                <p className="text-lg text-neutral-500 max-w-3xl mx-auto">
-                  At SkillQuest, we are dedicated to helping individuals unlock
-                  their full potential. Our platform combines cutting-edge AI
-                  technology with expert insights to provide personalized career
-                  guidance and skill assessments.
-                </p>
-              </div>
-            </section>
-          </CarouselItem>
-
-          {/* Features Section */}
-          <CarouselItem className="assessment">
-            <section className="Assessment py-20 px-4 bg-white m-3">
-              <div className="container mx-auto">
-                <div className="grid md:grid-cols-2 gap-12">
-                  <div className="p-8 rounded-2xl bg-secondary">
-                    <h3 className="text-2xl font-bold mb-4">
-                      Skill Assessment
-                    </h3>
-                    <p className="text-neutral-500 mb-6">
-                      Evaluate your competencies through targeted questions
-                      across various skill levels. Get detailed insights into
-                      your strengths.
-                    </p>
-                    <Link to="/register">
-                      <Button variant="secondary">Learn More</Button>
-                    </Link>
-                  </div>
-                  <div className="p-8 rounded-2xl bg-secondary">
-                    <h3 className="text-2xl font-bold mb-4">AI Career Coach</h3>
-                    <p className="text-neutral-500 mb-6">
-                      Receive personalized career guidance based on your
-                      assessment results. Let AI help you make informed
-                      decisions.
-                    </p>
-                    <Link to="/register">
-                      <Button variant="secondary">Learn More</Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </CarouselItem>
-
-          {/* Contact Us Section */}
-          <CarouselItem className="contact">
-            <section className="contact-us py-20 px-4 bg-gray-100 m-3">
-              <div className="container mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-8">
-                  Contact Us
-                </h2>
-                <p className="text-lg text-neutral-500 max-w-3xl mx-auto mb-8">
-                  Have questions or need assistance? Reach out to us, and we’ll
-                  be happy to help!
-                </p>
-                <Link to="/contact">
-                  <Button size="lg" className="gap-2">
-                    Get in Touch <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </section>
+          <CarouselItem
+            id="hero2"
+            className="flex items-center pb-5"
+            style={{
+              backgroundImage: `url(${bgHero})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <HeroSection2 />
+            </React.Suspense>
           </CarouselItem>
         </CarouselContent>
 
-        {/* Carousel Controls */}
-
-        <CarouselNext className="border-spacing-1   right-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-200 text-[#5300B3] p-2 rounded-full shadow-md hover:bg-gray-300 hover:text-[#5300B3]" />
+        <CarouselNext
+          aria-label="Next Slide"
+          className="right-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 text-[#5300B3] hover:text-[#5300B3] animate-bounce"
+        />
       </Carousel>
+
+      <div
+        id="story-us"
+        className="bg-fixed bg-center bg-cover"
+        style={{ backgroundImage: `url(${bgAboutUS})` }}
+      >
+        <StoryUsSection />
+      </div>
+
+      <div
+        id="how-it-works"
+        className="bg-fixed bg-center bg-cover "
+        style={{ backgroundImage: `url(${bgHowItWork})` }}
+      >
+        {/* {isLargeScreen ? ( */}
+        <HowItWorksSection />
+        {/* ) : (
+          <ScrollArea className=" w-full overflow-x-auto">
+            <div className="min-w-[800px]">
+              <HowItWorksSection />
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        )} */}
+      </div>
+
+      <div
+        id="features"
+        className="bg-fixed bg-center bg-cover"
+        style={{ backgroundImage: `url(${bgAboutUS})` }}
+      >
+        <div
+          id="features"
+          className="bg-fixed bg-center bg-cover"
+          style={{ backgroundImage: `url(${bgAboutUS})` }}
+        >
+          {/* {isLargeScreen ? ( */}
+          <FeaturesSection />
+          {/* ) : (
+            <ScrollArea className="w-full overflow-x-auto">
+              <div className="flex gap-4 px-4 min-w-[600px]">
+                <FeaturesSection />
+              </div>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
+          )} */}
+        </div>
+      </div>
+
+      {/* Login/Register Tabs Section */}
+      <Tabs
+        id="register-login-section" // Added specific ID for easier scrolling
+        value={activeTab} // Control the active tab with state
+        onValueChange={setActiveTab} // Update state when tab changes
+        className="bg-cover bg-center py-10 bg-fixed"
+        style={{ backgroundImage: `url(${bgAboutUS})` }}
+      >
+        <TabsList className="container max-w-xs grid grid-cols-2 content-center mx-auto rounded-full backdrop-blur-lg border-2 border-white shadow-2xl mt-10">
+          <TabsTrigger
+            value="login"
+            className="rounded-full p-2 data-[state=active]:text-white data-[state=active]:bg-[#5300B3] data-[state=active]:shadow-lg"
+          >
+            Login
+          </TabsTrigger>
+          <TabsTrigger
+            value="register"
+            className="rounded-full data-[state=active]:text-white data-[state=active]:bg-[#5300B3] data-[state=active]:shadow-lg"
+          >
+            Register
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="login">
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <Login /> {/* Login component */}
+          </React.Suspense>
+        </TabsContent>
+
+        <TabsContent value="register">
+          <React.Suspense fallback={<div>Loading...</div>}>
+            {/* Pass the handleRegistrationSuccess function to the Register component */}
+            <Register onRegistrationSuccess={handleRegistrationSuccess} />
+          </React.Suspense>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
