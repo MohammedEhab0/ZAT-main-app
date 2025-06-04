@@ -150,7 +150,7 @@ export default function AdminSkills() {
         <CardHeader className="flex flex-row items-center justify-between text-lg md:text-3xl">
           <CardTitle className="text-xl md:text-3xl">Skills Library</CardTitle>
           <Button
-            className="flex items-center gap-2 bg-[#5300B3] text-white hover:bg-[#ac6af7]"
+            className="flex items-center gap-2 bg-[#5300B3] text-white hover:bg-[#ac6af7] text-base font-semibold"
             onClick={() => handleOpenDialog()}
           >
             <Plus className="h-4 w-4" />

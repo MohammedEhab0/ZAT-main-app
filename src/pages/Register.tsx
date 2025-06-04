@@ -48,7 +48,7 @@ export default function Register({ onRegistrationSuccess }: RegisterProps) {
       phoneNumber: "",
       email: "",
       password: "",
-      // countryCode: "", // Ensure this is handled by RegistrationFields for the select input
+      countryCode: "", // Ensure this is handled by RegistrationFields for the select input
     },
   });
 

@@ -64,7 +64,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         }`}
       >
         <div className="px-4 py-2 mb-6">
-          <Link to="/" className="flex items-center">
+          <Link to="/admin" className="flex items-center">
             <span className="text-3xl font-bold text-[#5300B3]">ZAT </span>
             <span className="ml-2 text-3xl bg-[#5300B3] text-white px-2 py-0.5 rounded">
               Admin
@@ -78,7 +78,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               <li key={item.label}>
                 <Link
                   to={item.href}
-                  className={`flex items-center px-4 py-2 text-base rounded-md hover:bg-[#ac6af7] hover:text-white
+                  className={`flex items-center px-4 py-2 text-base font-semibold rounded-md hover:bg-[#ac6af7] hover:text-white
                     ${
                       location.pathname === item.href
                         ? "bg-[#5300B3] text-white"

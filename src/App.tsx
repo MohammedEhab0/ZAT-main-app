@@ -9,12 +9,15 @@ import React, { ReactNode } from "react";
 // Import your AuthProvider and useAuth hook
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
+// Import the setup function for axios interceptors AND the axiosInstance itself
+import { setupAxiosInterceptors } from "./api/axiosInstance";
+import axiosInstance from "./api/axiosInstance"; // IMPORTANT: Import axiosInstance here for ejecting
+
 // Import your pages
 import Index from "./pages/Index"; // Your homepage now contains Login/Register
-// Login and Register are no longer separate routes here
 import CompleleteForm from "./pages/completeUserProfile";
 import Dashboard from "./pages/Dashboard"; // This will be the general user dashboard
-import Quiz from "./pages/Quiz";
+import Assessment from "./pages/Assessment";
 import Report from "./pages/Report";
 import AdminDashboard from "./pages/admin/AdminDashboard/AdminDashboard";
 import AdminUsers from "./pages/admin/AdminUsers/AdminUsers";
@@ -25,7 +28,7 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// --- Helper Component for Protected Routes ---
+// --- Helper Component for Protected Routes (No change here, but its usage is removed for admin routes) ---
 interface ProtectedRouteProps {
   children: ReactNode;
   allowedUserTypes?: Array<"premium" | "basic" | "admin">;
@@ -40,23 +43,37 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   const { isAuthenticated, user } = useAuth();
 
   if (!isAuthenticated) {
-    return <Navigate to="/" replace />; // Redirect to home page
+    return <Navigate to="/" replace />;
+  }
+
+  if (requiresProfileCompletion && user && !user.hasCompleteProfile) {
+    return <Navigate to="/complete-profile" replace />;
   }
 
   if (allowedUserTypes && user && !allowedUserTypes.includes(user.userType)) {
     console.warn(
       `User with type '${user.userType}' attempted to access restricted route. Redirecting.`
     );
-    return <Navigate to="/dashboard" replace />; // Redirect to general user dashboard
-  }
-
-  if (requiresProfileCompletion && user && user.hasCompleteProfile) {
-    return <Navigate to="/dashboard" replace />; // Redirect if profile already complete
+    return <Navigate to="/dashboard" replace />;
   }
 
   return <>{children}</>;
 };
 // --- End Helper Component ---
+
+// --- Component to set up Axios Interceptors with `useAuth` (No change here) ---
+const AxiosInterceptorSetup: React.FC = () => {
+  const { logout } = useAuth();
+
+  React.useEffect(() => {
+    const interceptorId = setupAxiosInterceptors(logout);
+    return () => {
+      axiosInstance.interceptors.response.eject(interceptorId);
+    };
+  }, [logout]);
+
+  return null;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -65,11 +82,12 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AuthProvider>
+          <AxiosInterceptorSetup />
           <Routes>
-            <Route path="/" element={<Index />} />{" "}
-            {/* Homepage with embedded Login/Register */}
-            {/* Removed: <Route path="/login" element={<Login />} /> */}
-            {/* Removed: <Route path="/register" element={<Register />} /> */}
+            <Route path="/" element={<Index />} />
+            {/* The quiz route below is currently unprotected. If you want it protected, uncomment the ProtectedRoute wrapper */}
+            <Route path="/assessmnt" element={<Assessment />} />
+
             {/* Profile Completion Route - Protected and redirects if profile is already complete */}
             <Route
               path="/complete-profile"
@@ -90,17 +108,6 @@ const App = () => (
                 </ProtectedRoute>
               }
             />
-            {/* Quiz and Report pages - Typically for basic/premium users */}
-            <Route
-              path="/quiz"
-              element={
-                <ProtectedRoute
-                  allowedUserTypes={["basic", "premium", "admin"]}
-                >
-                  <Quiz />
-                </ProtectedRoute>
-              }
-            />
             <Route
               path="/report"
               element={
@@ -111,45 +118,45 @@ const App = () => (
                 </ProtectedRoute>
               }
             />
-            {/* Admin Routes - Only accessible by 'admin' userType */}
+            {/* Admin Routes - NOW COMMENTED OUT FOR DEMO */}
             <Route
               path="/admin"
               element={
-                <ProtectedRoute allowedUserTypes={["admin"]}>
-                  <AdminDashboard />
-                </ProtectedRoute>
+                // <ProtectedRoute allowedUserTypes={["admin"]}>
+                <AdminDashboard />
+                // </ProtectedRoute>
               }
             />
             <Route
               path="/admin/users"
               element={
-                <ProtectedRoute allowedUserTypes={["admin"]}>
-                  <AdminUsers />
-                </ProtectedRoute>
+                // <ProtectedRoute allowedUserTypes={["admin"]}>
+                <AdminUsers />
+                // </ProtectedRoute>
               }
             />
             <Route
               path="/admin/levels"
               element={
-                <ProtectedRoute allowedUserTypes={["admin"]}>
-                  <AdminLevels />
-                </ProtectedRoute>
+                // <ProtectedRoute allowedUserTypes={["admin"]}>
+                <AdminLevels />
+                // </ProtectedRoute>
               }
             />
             <Route
               path="/admin/quizzes"
               element={
-                <ProtectedRoute allowedUserTypes={["admin"]}>
-                  <AdminQuizzes />
-                </ProtectedRoute>
+                // <ProtectedRoute allowedUserTypes={["admin"]}>
+                <AdminQuizzes />
+                // </ProtectedRoute>
               }
             />
             <Route
               path="/admin/skills"
               element={
-                <ProtectedRoute allowedUserTypes={["admin"]}>
-                  <AdminSkills />
-                </ProtectedRoute>
+                // <ProtectedRoute allowedUserTypes={["admin"]}>
+                <AdminSkills />
+                // </ProtectedRoute>
               }
             />
             {/* Catch-all for undefined routes */}

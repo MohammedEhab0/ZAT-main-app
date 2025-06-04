@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+/* force Radix Slider filled track to be your color */
+[data-state="range"] {
+  background-color: #5300b3 !important;
+  height: 0.5rem !important; /* Optional: make it thicker */
+}

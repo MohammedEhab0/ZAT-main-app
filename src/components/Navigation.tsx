@@ -78,8 +78,8 @@ export default function Navigation() {
                     }
                     className={
                       location.hash === "#register-login-section"
-                        ? "bg-[#5300B3] text-white hover:bg-[#5300B3]"
-                        : "hover:bg-[#ac6af7] hover:text-white"
+                        ? "bg-[#5300B3] text-white hover:bg-[#5300B3] font-bold"
+                        : "hover:bg-[#ac6af7] hover:text-white font-bold"
                     }
                   >
                     Register

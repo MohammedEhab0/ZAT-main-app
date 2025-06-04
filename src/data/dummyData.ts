@@ -81,9 +81,9 @@ export const quizQuestions: QuizQuestion[] = [
     skillLeft: "communication",
     skillRight: "problemSolving",
     skillLeftDefinition:
-      "I focus on clear and open dialogue to resolve the confusion.",
+      "I focus on clear and open dialogue to resolve the confusion .",
     skillRightDefinition:
-      "I analyze the root causes of the misunderstanding to prevent it from happening again.",
+      "I analyze the root causes of the misunderstanding to prevent it from happening again .",
   },
   {
     id: "q2",
@@ -92,9 +92,9 @@ export const quizQuestions: QuizQuestion[] = [
     skillLeft: "empathy",
     skillRight: "criticalThinking",
     skillLeftDefinition:
-      "I connect with team members' feelings and provide emotional support.",
+      "I connect with team members' feelings and provide emotional support .",
     skillRightDefinition:
-      "I evaluate the factors causing low morale and develop a systematic approach to improve it.",
+      "I evaluate the factors causing low morale and develop a systematic approach to improve it .",
   },
 ];
 export const quizes: Quiz[] = [

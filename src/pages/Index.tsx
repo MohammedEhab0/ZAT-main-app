@@ -123,16 +123,7 @@ export default function Index() {
         className="bg-fixed bg-center bg-cover "
         style={{ backgroundImage: `url(${bgHowItWork})` }}
       >
-        {/* {isLargeScreen ? ( */}
         <HowItWorksSection />
-        {/* ) : (
-          <ScrollArea className=" w-full overflow-x-auto">
-            <div className="min-w-[800px]">
-              <HowItWorksSection />
-            </div>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
-        )} */}
       </div>
 
       <div
@@ -145,16 +136,7 @@ export default function Index() {
           className="bg-fixed bg-center bg-cover"
           style={{ backgroundImage: `url(${bgAboutUS})` }}
         >
-          {/* {isLargeScreen ? ( */}
           <FeaturesSection />
-          {/* ) : (
-            <ScrollArea className="w-full overflow-x-auto">
-              <div className="flex gap-4 px-4 min-w-[600px]">
-                <FeaturesSection />
-              </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
-          )} */}
         </div>
       </div>
 

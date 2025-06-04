@@ -27,18 +27,18 @@ export default function HeroSection() {
         <img
           src={Hero1}
           alt="Illustration representing the hero section"
-          className="w-60 md:w-[30rem] xl:w-[70rem] "
+          className="w-60 md:w-[30rem] xl:w-[70rem] transition-transform duration-600 hover:animate-shake"
         />
       </div>
 
       {/* Right Text */}
-      <div className="  flex flex-col items-center lg:items-start space-y-14 text-center lg:text-start max-w-md w-full">
+      <div className="  flex flex-col items-center lg:items-center space-y-14 text-center lg:text-start max-w-md w-full">
         <div className="text-[#5300B3] font-semibold">
           <p className="text-sm md:text-2xl xl:text-3xl">Same.</p>
           <p className="text-sm md:text-2xl xl:text-3xl">We’ve been there!</p>
         </div>
         <div
-          className="text-[0.6rem] md:text-sm text-black font-semibold py-8 px-10 md:px-12 bg-contain bg-center bg-no-repeat text-center"
+          className="text-[0.6rem] md:text-sm text-black font-semibold py-8 px-10 md:px-12 bg-contain bg-center bg-no-repeat text-center hover:animate-bounce transform transition-transform duration-1000 "
           style={{ backgroundImage: `url(${cHero})` }}
         >
           <p>You’re not broken.</p>

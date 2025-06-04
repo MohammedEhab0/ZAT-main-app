@@ -31,13 +31,13 @@ export default function HeroSection() {
           <img
             src={Hero2}
             alt="Illustration representing a border hero"
-            className="w-64 md:w-[20rem] xl:w-[28rem] object-contain"
+            className="w-64 md:w-[20rem] xl:w-[28rem] object-contain transition-transform duration-600 hover:animate-shake"
           />
         </div>
 
         {/* Right Text */}
         <div
-          className="flex flex-col text-center text-[.6rem] md:text-base font-semibold max-w-sm flex-1 bg-contain bg-center bg-no-repeat md:px-10 md:py-14 py-10 px-8"
+          className="flex flex-col text-center text-[.6rem] md:text-base font-semibold max-w-sm flex-1 bg-contain bg-center bg-no-repeat md:px-10 md:py-14 py-10 px-8 hover:animate-bounce"
           style={{ backgroundImage: `url(${cHero})` }}
         >
           <p>Your path is yours to draw.</p>
